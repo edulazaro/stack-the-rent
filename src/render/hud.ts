@@ -65,13 +65,19 @@ export function drawHud(ctx: CanvasRenderingContext2D, g: GameData, info: HudInf
   if (playing && g.blocks.length <= 2 && g.frame % 60 < 40) {
     drawPill(ctx, isTouch ? t.placeHintTouch : t.placeHintKey, cx, cy + 42, 12, HUD.hintPlace);
   }
-  if (g.climberHint > 0 && g.frame % 50 < 30) {
+  if (playing && g.climberHint > 0 && g.frame % 50 < 30) {
     drawPill(ctx, isTouch ? t.climberHintTouch : t.climberHintKey, cx, cy - 80, 11, HUD.hintClimbers);
   }
-  if (g.helicopters.some((h) => h.active) && g.blocks.length < 20 && g.collapseTimer === 0 && g.frame % 50 < 30) {
+  if (
+    playing &&
+    g.helicopters.some((h) => h.active) &&
+    g.blocks.length < 20 &&
+    g.collapseTimer === 0 &&
+    g.frame % 50 < 30
+  ) {
     drawPill(ctx, isTouch ? t.heliHintTouch : t.heliHintKey, cx, cy - 37, 11, HUD.hintDanger);
   }
-  if (g.workers <= 3 && g.frame % 40 < 25 && g.convenioTimer <= 0 && g.collapseTimer === 0) {
+  if (playing && g.workers <= 3 && g.frame % 40 < 25 && g.convenioTimer <= 0 && g.collapseTimer === 0) {
     drawPill(ctx, g.workers <= 0 ? t.noWorkers : t.fewWorkers(g.workers), cx, cy, 18, HUD.hintDanger, HUD.pillBgStrong);
   }
 

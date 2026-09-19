@@ -282,8 +282,13 @@ export function drawClimber(ctx: CanvasRenderingContext2D, c: Climber, ropeTop: 
   ctx.arc(x, y + 4, 5, Math.PI, 0);
   ctx.fill();
   ctx.restore();
+}
 
-  if (c.state === "working" && c.quoteTimer > 0) {
-    drawBubble(ctx, c.quote, x, y - 26, BUBBLE_SMALL, Math.min(1, c.quoteTimer / 20));
+/** Climbers' protest bubbles, drawn after the spectators so nothing covers them. Tower coordinates. */
+export function drawClimberQuotes(ctx: CanvasRenderingContext2D, g: GameData) {
+  for (const c of g.climbers) {
+    if (c.state === "working" && c.quoteTimer > 0) {
+      drawBubble(ctx, c.quote, c.x, c.y - 26, BUBBLE_SMALL, Math.min(1, c.quoteTimer / 20));
+    }
   }
 }

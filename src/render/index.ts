@@ -1,6 +1,6 @@
 import { CANVAS_H, CANVAS_W } from "../game/constants";
 import type { GameData } from "../game/types";
-import { drawAirborne } from "./actors";
+import { drawAirborne, drawClimberQuotes } from "./actors";
 import { drawBorderCamera } from "./border";
 import type { HudInfo } from "./hud";
 import { drawAim, drawHud, drawPoliticianQuote } from "./hud";
@@ -21,6 +21,10 @@ export function render(ctx: CanvasRenderingContext2D, g: GameData, info: RenderI
   ctx.restore();
 
   drawSpectators(ctx, g);
+  ctx.save();
+  ctx.translate(0, g.scrollY);
+  drawClimberQuotes(ctx, g);
+  ctx.restore();
   drawAirborne(ctx, g);
   drawPoliticianQuote(ctx, g);
   drawBorderCamera(ctx, g, info.t, info.isTouch);
