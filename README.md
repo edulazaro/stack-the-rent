@@ -76,6 +76,8 @@ iframe.contentWindow.postMessage({ type: "set-locale", locale: "ca" }, "*");
 
 Without `?lang`, the game uses the player's last choice or the browser language (English unless Spanish or Catalan).
 
+Every [GitHub release](https://github.com/edulazaro/stack-the-rent/releases) includes `stack-the-rent-itch.zip`, the built game ready to serve from any static host.
+
 ## Sponsors
 
 Stack the Rent is supported by the following sponsors. Thank you for keeping it growing:
