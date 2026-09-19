@@ -1,17 +1,19 @@
 # Stack the Rent
 
 <p align="center">
+    <a href="https://edulazaro.itch.io/stack-the-rent"><img src="https://img.shields.io/badge/play-itch.io-FA5C5C?logo=itchdotio&logoColor=white" alt="Play on itch.io"></a>
     <a href="https://github.com/edulazaro/stack-the-rent/actions/workflows/tests.yml"><img src="https://github.com/edulazaro/stack-the-rent/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
     <a href="https://github.com/edulazaro/stack-the-rent/blob/main/package.json"><img src="https://img.shields.io/github/package-json/v/edulazaro/stack-the-rent" alt="Version"></a>
     <a href="https://react.dev"><img src="https://img.shields.io/github/package-json/dependency-version/edulazaro/stack-the-rent/react" alt="React"></a>
     <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/github/package-json/dependency-version/edulazaro/stack-the-rent/dev/typescript" alt="TypeScript"></a>
+    <a href="https://github.com/edulazaro/stack-the-rent/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/edulazaro/stack-the-rent" alt="License"></a>
 </p>
 
 Arcade tower stacker about Andorra's housing market. Build the tallest tower you can while rent goes up with every floor, the old men comment from the ladders, the GOAT (Group Organized Against Towers) helicopters bomb it and climbers abseil down its sides to smash it.
 
 ![Stack the Rent](itch/cover.png)
 
-Runs in the browser on desktop and mobile. English, Spanish and Catalan.
+**[Play it in your browser on itch.io](https://edulazaro.itch.io/stack-the-rent)**. Works on desktop and mobile, in English, Spanish and Catalan.
 
 ## How to play
 
@@ -73,6 +75,20 @@ iframe.contentWindow.postMessage({ type: "set-locale", locale: "ca" }, "*");
 
 Without `?lang`, the game uses the player's last choice or the browser language (English unless Spanish or Catalan).
 
-## Credits
+## Sponsors
 
-Originally made for [andorranos.com](https://andorranos.com).
+Stack the Rent is supported by the following sponsors. Thank you for keeping it growing:
+
+<p>
+  <a href="https://andorradev.com"><img src="art/logo-andorradev.png" width="24" alt="AndorraDev"></a>&nbsp;<a href="https://andorradev.com">AndorraDev</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://andorranos.com"><img src="art/logo-andorranos.png" width="24" alt="Andorranos"></a>&nbsp;<a href="https://andorranos.com">Andorranos</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://andorrawork.com"><img src="art/logo-andorrawork.png" width="24" alt="AndorraWork"></a>&nbsp;<a href="https://andorrawork.com">AndorraWork</a>
+</p>
+
+## Author
+
+Created by [Edu Lazaro](https://edulazaro.com)
+
+## License
+
+Stack the Rent is open-sourced software licensed under the [MIT license](LICENSE.md).
