@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { useCallback, useEffect, useState } from "react";
+import { OptionSwitch } from "./menu";
 import { storage } from "./stage";
 
 export type Locale = "es" | "ca" | "en";
@@ -67,23 +68,11 @@ export function LocaleSwitch({
   label: string;
 }): ReactElement {
   return (
-    <div className="mt-1 flex w-56 flex-col gap-1 text-left">
-      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{label}</span>
-      <div className="flex border border-white/60">
-        {LOCALES.map((l) => (
-          <button
-            key={l}
-            type="button"
-            onClick={() => onChange(l)}
-            aria-pressed={l === locale}
-            className={`flex-1 py-2 text-[11px] font-bold uppercase transition-colors ${
-              l === locale ? "bg-white text-black" : "text-white hover:bg-white/20"
-            }`}
-          >
-            {NAMES[l]}
-          </button>
-        ))}
-      </div>
-    </div>
+    <OptionSwitch
+      label={label}
+      options={LOCALES.map((l) => ({ value: l, label: NAMES[l] }))}
+      value={locale}
+      onChange={onChange}
+    />
   );
 }

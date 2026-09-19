@@ -52,13 +52,14 @@ pnpm build:itch   # dist-itch/ and stack-the-rent-itch.zip, ready to upload to i
 src/
   game/      game logic without React or canvas (state, rules, texts, tests)
   render/    canvas drawing, reads the state and never changes it (theme.ts has every color and font)
-  shell/     reusable shell: fixed 60 Hz loop, fullscreen/landscape handling, pause, menus, audio, i18n
-  sounds.ts  every sound, synthesized with the Web Audio API
+  shell/     reusable shell: fixed 60 Hz loop, fullscreen/landscape handling, pause, menus, audio, music, i18n
+  music/     background music tracks
+  sounds.ts  every sound effect, synthesized with the Web Audio API
   Game.tsx   React layer: screens and input
 itch/        cover, screenshots and store page text
 ```
 
-Stack: Vite, React 19, TypeScript, Tailwind CSS v4. No game engine or asset files: everything is drawn with the Canvas 2D API and every sound is synthesized.
+Stack: Vite, React 19, TypeScript, Tailwind CSS v4. No game engine: everything is drawn with the Canvas 2D API and every sound effect is synthesized. The background music was made with Suno.
 
 ## Embedding
 
@@ -91,4 +92,4 @@ Created by [Edu Lazaro](https://edulazaro.com)
 
 ## License
 
-Stack the Rent is open-sourced software licensed under the [MIT license](LICENSE.md).
+Stack the Rent is open-sourced software licensed under the [MIT license](LICENSE.md). The music in `src/music/` is not covered by this license.

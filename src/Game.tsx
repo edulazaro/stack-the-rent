@@ -5,12 +5,14 @@ import { floorsBuilt, placeBlock, shoot, update } from "./game/logic";
 import { createGame, resetGame } from "./game/state";
 import { TEXT } from "./game/texts";
 import type { EndReason, GameEvents } from "./game/types";
+import { music } from "./music";
 import { render } from "./render";
 import { isMuted, setMuted, unlockAudio } from "./shell/audio";
 import type { Locale } from "./shell/i18n";
 import { LocaleSwitch, useLocale } from "./shell/i18n";
 import type { HelpItem } from "./shell/menu";
-import { HelpList, MenuButton, MenuLayer, MenuTitle } from "./shell/menu";
+import { HelpList, MenuButton, MenuLayer, MenuTitle, OptionSwitch } from "./shell/menu";
+import type { MusicChoice } from "./shell/music";
 import {
   EMBED,
   fitCanvas,
@@ -44,6 +46,7 @@ export default function StackTheRent({ locale: hostLocale }: { locale?: Locale }
   const [subScreen, setSubScreen] = useState<"help" | "settings" | null>(null);
   const [result, setResult] = useState({ score: 0, newRecord: false, reason: "miss" as EndReason });
   const [soundOff, setSoundOff] = useState(isMuted);
+  const [musicChoice, setMusicChoice] = useState(music.getChoice);
   const highScoreRef = useRef(loadHighScore(HIGHSCORE_KEY));
   const endedAtRef = useRef(0);
 
@@ -53,6 +56,9 @@ export default function StackTheRent({ locale: hostLocale }: { locale?: Locale }
   useEffect(() => {
     pausedRef.current = paused;
   }, [paused]);
+
+  const musicOn = gameState === "playing" && !paused && !soundOff;
+  useEffect(() => music.setPlaying(musicOn), [musicOn]);
 
   const events = useMemo<GameEvents>(
     () => ({
@@ -91,6 +97,7 @@ export default function StackTheRent({ locale: hostLocale }: { locale?: Locale }
   const play = useCallback(() => {
     if (performance.now() - endedAtRef.current < RESTART_DELAY_MS) return;
     unlockAudio();
+    if (!isMuted()) music.setPlaying(true);
     if (isTouch) enter();
     startGame();
   }, [isTouch, enter, startGame]);
@@ -104,6 +111,11 @@ export default function StackTheRent({ locale: hostLocale }: { locale?: Locale }
     const next = !isMuted();
     setMuted(next);
     setSoundOff(next);
+  }, []);
+
+  const changeMusic = useCallback((choice: MusicChoice) => {
+    music.setChoice(choice);
+    setMusicChoice(choice);
   }, []);
 
   const openGame = useCallback(() => {
@@ -208,6 +220,10 @@ export default function StackTheRent({ locale: hostLocale }: { locale?: Locale }
     { chip: t.chipClimbers, chipClass: "bg-orange-500 text-white", text: t.helpClimbers },
   ];
   const soundLabel = soundOff ? s.soundOff : s.soundOn;
+  const musicOptions: { value: MusicChoice; label: string }[] = [
+    { value: "random", label: s.musicRandom },
+    ...Array.from({ length: music.trackCount }, (_, i) => ({ value: i, label: `${s.track} ${i + 1}` })),
+  ];
 
   let screen: ReactNode = null;
   if (subScreen === "help") {
@@ -230,6 +246,7 @@ export default function StackTheRent({ locale: hostLocale }: { locale?: Locale }
         {!isTouch && (
           <MenuButton onClick={view.toggleFullscreen}>{view.fullscreen ? s.exitFullscreen : s.fullscreen}</MenuButton>
         )}
+        <OptionSwitch label={s.music} options={musicOptions} value={musicChoice} onChange={changeMusic} />
         {canChoose && <LocaleSwitch locale={locale} onChange={setLocale} label={s.language} />}
         <div className="mt-2">
           <MenuButton onClick={() => setSubScreen(null)}>{s.back}</MenuButton>

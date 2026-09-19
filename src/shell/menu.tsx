@@ -62,3 +62,37 @@ export function HelpList({ items }: { items: HelpItem[] }): ReactElement {
     </div>
   );
 }
+
+/** Labeled segmented control for settings with a few fixed options. */
+export function OptionSwitch<T extends string | number>({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: readonly { value: T; label: string }[];
+  value: T;
+  onChange: (value: T) => void;
+}): ReactElement {
+  return (
+    <div className="mt-1 flex w-56 flex-col gap-1 text-left">
+      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{label}</span>
+      <div className="flex border border-white/60">
+        {options.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            onClick={() => onChange(option.value)}
+            aria-pressed={option.value === value}
+            className={`flex-1 py-2 text-[11px] font-bold uppercase transition-colors ${
+              option.value === value ? "bg-white text-black" : "text-white hover:bg-white/20"
+            }`}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}

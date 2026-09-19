@@ -19,7 +19,8 @@ const MUTED_KEY = "muted";
 let context: AudioContext | null = null;
 let muted = storage.get(MUTED_KEY) === "1";
 
-const getContext = () => (context ??= new AudioContext());
+/** Shared Web Audio context, created on first use. */
+export const getContext = () => (context ??= new AudioContext());
 
 export const isMuted = () => muted;
 
