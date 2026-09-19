@@ -1,5 +1,3 @@
-![Stack the Rent](itch/cover.png)
-
 # Stack the Rent
 
 <p align="center">
@@ -10,6 +8,8 @@
 </p>
 
 Arcade tower stacker about Andorra's housing market. Build the tallest tower you can while rent goes up with every floor, the old men comment from the ladders, the GOAT (Group Organized Against Towers) helicopters bomb it and climbers abseil down its sides to smash it.
+
+![Stack the Rent](itch/cover.png)
 
 Runs in the browser on desktop and mobile. English, Spanish and Catalan.
 
